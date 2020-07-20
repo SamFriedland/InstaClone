@@ -4,20 +4,16 @@ from django.db import models
 
 class User(models.Model):
     username = models.CharField(max_length=64)
-    email
-    date_of_birth
-    profile_pic
-    bio
 
     def __str__(self):
         return self.username
 
 
-class Follows(models.Model):
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followed")
-    followed = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+class UserFollowing(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+    following_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers")
     def __str__(self):
-        return ("f' {self.User} is followed by {following]")
+        return (f"{self.user_id} is followed by {self.following_user_id}")
 
 
 class Instapost(models.Model):
