@@ -1,0 +1,11 @@
+{% extends "instaclone/base.html" %}
+{% block title %}Profile Page{% endblock %}
+
+{% block content %}
+    <h1>{{User.username}}'s Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit", name="save_pp">Upload Prof_Pic</button>
+    </form>
+{% endblock %}

@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'instaclone.apps.InstacloneConfig'
+    'instaclone.apps.InstacloneConfig',
+    'register.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [

@@ -23,9 +23,12 @@ class UserFollowing(models.Model):
         return (f"{self.user_id} is followed by {self.following_user_id}")
 
 
+
 class InstaPost(models.Model):
+    picture = models.ImageField(upload_to="images")
     post_title = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+    caption = models.CharField(max_length=500)
+    pub_date = timezone.now()
 
     def __str__(self):
         return self.post_title
