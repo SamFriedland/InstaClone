@@ -22,8 +22,9 @@ from register import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', v.register, name="register"),
-    path('', include('instaclone.urls'),
-         )
+    path('', include('instaclone.urls')),
+    path('', include('django.contrib.auth.urls')),
+
 ]
 
 if settings.DEBUG:

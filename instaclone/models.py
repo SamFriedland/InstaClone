@@ -1,20 +1,31 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
-
-class User(models.Model):
+'''
+class user(models.Model):
     username = models.CharField(max_length=64)
     profile_picture = models.ImageField(upload_to="images", default='/emptyprofilepic')
 
     def __str__(self):
         return self.username
-6
+'''
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    username = models.CharField(max_length=64)
+    profile_picture = models.ImageField(upload_to="images", default='/emptyprofilepic')
+
+    def __str__(self):
+        return self.username
+
+
 
 class UserFollowing(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers")
-    following_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="followers")
+    following_user_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="following")
 
     class Meta:
         unique_together=[['user_id','following_user_id']]
@@ -25,6 +36,7 @@ class UserFollowing(models.Model):
 
 
 class InstaPost(models.Model):
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE)
     picture = models.ImageField(upload_to="images")
     post_title = models.CharField(max_length=200)
     caption = models.CharField(max_length=500)
@@ -39,10 +51,10 @@ class InstaPost(models.Model):
 
 class Like(models.Model):
     post = models.ForeignKey(InstaPost, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(InstaPost, on_delete=models.CASCADE)
     comment_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
@@ -52,5 +64,5 @@ class Comment(models.Model):
 
 class CommentLike(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
 #cd /d C:/Users/sam/PycharmProjects/InstaClone

@@ -1,0 +1,12 @@
+{% extends "instaclone/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+ <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit", name="login">Login</button>
+     <p>Don't have an account? <a href="/register">Register Here</a></p>
+ </form>
+{% endblock %}

@@ -1,9 +1,9 @@
 from django import forms
-from .models import User, InstaPost
+from .models import Profile, InstaPost
 
 class ImageForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Profile
         fields=('profile_picture',)
 
 class ImageForm(forms.ModelForm):
