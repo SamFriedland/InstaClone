@@ -2,11 +2,14 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<h1>{{ Profile.username }}'s Profile</h1>
-<img src="{{ Profile.profile_picture }} ">
-<ul>
-    <li><a href="/profile_pic/">Upload Profile Pic</a></li>
-    <li><a href="/upload">Upload Photo</a></li>
-</ul>
+{% if user.is_authenticated %}
+    <h1>{{ request.user.username }}'s Profile</h1>
+    <img src="{% load static "emptyprofilepic.jpeg" %}" alt="Profile Picture">
+    <ul>
+        <p>{{ request.user.profile.profile_picture.url }}</p>
+        <li><a href="/profile_pic/">Upload Profile Pic</a></li>
+        <li><a href="/upload">Upload Photo</a></li>
+    </ul>
+{% endif %}
 
 {% endblock %}

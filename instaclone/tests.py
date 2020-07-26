@@ -16,24 +16,3 @@ class InstaPostTests(TestCase):
         oldPost = InstaPost(pub_date=time)
         self.assertIs(oldPost.was_published_recently(), False)
 
-class UserFollowTests(TestCase):
-
-    def setUp(self):
-        user_one=User.objects.create(username="user_one")
-        user_two=User.objects.create(username="user_two")
-        UserFollowing.objects.create(user_id=user_one, following_user_id=user_two)
-
-    def test_user_follows_user(self):
-        self.assertQuerysetEqual(
-            UserFollowing.objects.all(),
-            ['<UserFollowing: user_one is followed by user_two>']
-        )
-
-    def test_following(self):
-        user_one = User.objects.get(username="user_one")
-        self.assertQuerysetEqual(user_one.followers.all(), ['<UserFollowing: user_one is followed by user_two>'])
-
-    def test_followers(self):
-
-        user_two = User.objects.get(username="user_one")
-        self.assertQuerysetEqual(user_two.following.all(),['<UserFollowing: user_one is followed by user_two>'])

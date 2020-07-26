@@ -4,22 +4,19 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 # Create your models here.
-'''
-class user(models.Model):
-    username = models.CharField(max_length=64)
-    profile_picture = models.ImageField(upload_to="images", default='/emptyprofilepic')
-
-    def __str__(self):
-        return self.username
-'''
 
 class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
-    username = models.CharField(max_length=64)
-    profile_picture = models.ImageField(upload_to="images", default='/emptyprofilepic')
+    user = models.OneToOneField(User,on_delete=models.DO_NOTHING,null=True)
+    username =  models.CharField(max_length=100, default='',null=True)
+    bio = models.CharField(max_length=100, default='',null=True)
+    profile_picture = models.ImageField(upload_to="images/", default='/images/emptyprofilepic')
+    bio = models.CharField(max_length=500, default='',null=True)
+    d_o_b = models.DateTimeField('Date of birth', null=True)
 
     def __str__(self):
-        return self.username
+        return f'{self.user.username} Profile'
+
+
 
 
 
@@ -40,7 +37,7 @@ class InstaPost(models.Model):
     picture = models.ImageField(upload_to="images")
     post_title = models.CharField(max_length=200)
     caption = models.CharField(max_length=500)
-    pub_date = timezone.now()
+    pub_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.post_title

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import ImageForm
+from .forms import ImageForm, ImageFormProfile
 from django.template import loader
 from django.contrib.auth.decorators import login_required
 from .models import Profile
@@ -10,22 +10,21 @@ def index(response):
     return HttpResponse("hello")
 
 def home(response):
-    return HttpResponse("home")
+    return render(response, "instaclone/home.html")
 
 
 @login_required
 def my_profile(request):
     template = loader.get_template('instaclone/profile.html')
-    context = {'Profile.username':Profile.username}
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render({'profile_pic':profile_pic}, request))
 
 def profile_pic(request):
     if request.method == 'POST':
-        form = ImageForm(request.POST)
+        form = ImageFormProfile(request.POST)
         if form.is_valid():
             form.save()
     else:
-        form=ImageForm()
+        form=ImageFormProfile()
     return render(request, "instaclone/profile_pic.html", {"form":form})
 
 
