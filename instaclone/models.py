@@ -9,12 +9,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.DO_NOTHING,null=True)
     username =  models.CharField(max_length=100, default='',null=True)
     bio = models.CharField(max_length=100, default='',null=True)
-    profile_picture = models.ImageField(upload_to="images/", default='/images/emptyprofilepic')
+    profile_picture = models.ImageField(default='emptyprofilepic.jpg')
     bio = models.CharField(max_length=500, default='',null=True)
     d_o_b = models.DateTimeField('Date of birth', null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
 
 
 

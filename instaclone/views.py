@@ -16,7 +16,7 @@ def home(response):
 @login_required
 def my_profile(request):
     template = loader.get_template('instaclone/profile.html')
-    return HttpResponse(template.render({'profile_pic':profile_pic}, request))
+    return HttpResponse(template.render({}, request))
 
 def profile_pic(request):
     if request.method == 'POST':

@@ -14,7 +14,7 @@ def register(request):
             profile=Profile.objects.create(
                 user = user,
                 username = form.cleaned_data['username'],
-                d_o_b = form.cleaned_date['d_o_b']
+                d_o_b = form.cleaned_data['d_o_b']
             )
 
             profile.save()
