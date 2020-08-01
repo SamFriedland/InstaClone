@@ -9,7 +9,11 @@
     <ul>
         <li><a href="/profile_pic/">Upload Profile Pic</a></li>
         <li><a href="/upload">Upload Photo</a></li>
-    </ul>
+    </ul>1
+
+    {% for photo in user.profile.instapost_set.all %}
+    <img src="{{ photo.url }}" width="150" height="120">
+    {% endfor %}
 {% endif %}
 
 {% endblock %}
