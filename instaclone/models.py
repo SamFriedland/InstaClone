@@ -19,14 +19,16 @@ class Profile(models.Model):
 
 
 class UserFollowing(models.Model):
-    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="followers")
-    following_user_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="following")
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers")
+    following_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
 
     class Meta:
         unique_together=[['user_id','following_user_id']]
 
     def __str__(self):
         return (f"{self.user_id} is followed by {self.following_user_id}")
+
+
 
 
 
@@ -60,4 +62,7 @@ class Comment(models.Model):
 class CommentLike(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-#cd /d C:/Users/sam/PycharmProjects/InstaClone
+
+
+
+    #cd /d C:/Users/sam/PycharmProjects/InstaClone

@@ -1,0 +1,11 @@
+{% extends "instaclone/base.html" %}
+{% block title %}Followers{% endblock %}
+
+{% block content %}
+{% for followers in user.followers.all %}
+<p>{{ followers.following_user_id }}</p>
+{% endfor %}
+
+
+
+{% endblock %}

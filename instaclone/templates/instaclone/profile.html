@@ -1,19 +1,18 @@
-{% extends "instaclone/base.html" %}
+{% extends "instaclone/base.html" %}#
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    <h1>{{ user.username }}'s Profile</h1>
-    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" width="150" height="120" class="rounded-circle">
 
-    <ul>
-        <li><a href="/profile_pic/">Upload Profile Pic</a></li>
-        <li><a href="/upload">Upload Photo</a></li>
-    </ul>1
+ <h1>{{ user_profile.username }}'s Profile</h1>
+<img src="{{ user_profile.profile.profile_picture.url }}" alt="Profile Picture" width="150" height="120" class="rounded-circle">
+<ul>
 
-    {% for photo in user.profile.instapost_set.all %}
-    <img src="{{ photo.url }}" width="150" height="120">
+    <li><a href="http://127.0.0.1:8000/followers/{{ user_profile.username }}/">Followers</a></li>
+    <li><a href="http://127.0.0.1:8000/following/{{ user_profile.username }}/">Following</a></li>
+</ul>
+
+{% for photo in user_profile.profile.instapost_set.all %}
+    <img src="{{ photo.picture.url }}" width="150" height="120">
     {% endfor %}
-{% endif %}
-
 {% endblock %}
+
